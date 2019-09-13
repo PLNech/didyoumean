@@ -1,6 +1,6 @@
 import sys
 
-from didyoumean import did_you_mean
+from didyoumean3 import did_you_mean
 
 
 def main():

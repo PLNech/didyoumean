@@ -1,5 +1,6 @@
 import pathlib
-from setuptools import setup, find_packages
+
+from setuptools import setup
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
@@ -10,7 +11,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="didyoumean3",
-    version="0.1.1",
+    version="0.1.2",
     description="\"Did You Mean?\" suggestions for your Python3 projects.",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -23,12 +24,12 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
-    packages=find_packages(),
+    packages=['didyoumean3'],
     include_package_data=True,
     install_requires=["bs4"],
     entry_points={
         "console_scripts": [
-            "didyoumean=didyoumean.__main__:main",
+            "didyoumean3=didyoumean3.__main__:main",
         ]
     },
 )
