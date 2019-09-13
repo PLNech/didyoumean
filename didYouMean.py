@@ -1,45 +1,36 @@
-import os
-import urllib2
-import io
-import gzip
+import sys
 import sys
 import urllib
-import re
+from urllib.parse import quote
+from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
-from StringIO import StringIO
+
 
 def getPage(url):
-    request = urllib2.Request(url)
-    request.add_header('Accept-encoding', 'gzip')
-    request.add_header('User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20')
-    response = urllib2.urlopen(request)
-    if response.info().get('Content-Encoding') == 'gzip':
-        buf = StringIO( response.read())
-        f = gzip.GzipFile(fileobj=buf)
-        data = f.read()
-    else:
-        data = response.read()
+    request = Request(url)
+    request.add_header('User-Agent',
+                       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20')
+    response = urlopen(request)
+    data = response.read()
     return data
+
 
 def didYouMean(q):
     q = str(str.lower(q)).strip()
-    url = "http://www.google.com/search?q=" + urllib.quote(q)
+    url = "http://www.google.com/search?q=" + quote(q)
     html = getPage(url)
-    soup = BeautifulSoup(html)
-    ans = soup.find('a', attrs={'class' : 'spell'})
-    try:
-        result = repr(ans.contents)
-        result = result.replace("u'","")
-        result = result.replace("/","")
-        result = result.replace("<b>","")
-        result = result.replace("<i>","")
-        result = re.sub('[^A-Za-z0-9\s]+', '', result)
-        result = re.sub(' +',' ',result)
-    except AttributeError:
-        result = 1
+    soup = BeautifulSoup(html, 'html.parser')
+    async_contexts = [item.attrs["data-async-context"] for item in soup.find_all() if
+                      "data-async-context" in item.attrs]
+    result = urllib.parse.unquote([q for q in async_contexts if "query:" in q][0].replace("query:", ""))
     return result
 
+
 if __name__ == "__main__":
-    response = didYouMean(sys.argv[1])
-    print response
+    if len(sys.argv) > 1:
+        arg = sys.argv[1]
+    else:
+        arg = "vequ orloff"
+    response = didYouMean(arg)
+    print(response)
