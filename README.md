@@ -1,6 +1,6 @@
 # didYouMean
 
-didYouMean is Python module that you can use to correct spelling mistakes. It leverages Google's "Did You Mean" feature.
+didYouMean is Python module that you can use to correct spelling mistakes. It leverages Google Translate's "Did You Mean" feature, detecting the input language unless you specify one.
 
 ## Requirements
 - Python3
@@ -12,12 +12,15 @@ python didYouMean.py "fotball"
 > football
 python didYouMean.py "football"
 > football
+python didYouMean.py "ich bin mude" "de"
+> ich bin müde
 ```
 
 ```python
 from didYouMean3 import didYouMean
 didYouMean("fotball") # -> football
-didYouMean("fotball") # -> football
+didYouMean("football") # -> football
+didYouMean("ich bin mude") # -> ich bin müde
 ```
 
 # Credits

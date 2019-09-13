@@ -11,7 +11,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="didyoumean3",
-    version="0.1.2",
+    version="0.2.0",
     description="\"Did You Mean?\" suggestions for your Python3 projects.",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -26,7 +26,7 @@ setup(
     ],
     packages=['didyoumean3'],
     include_package_data=True,
-    install_requires=["bs4"],
+    install_requires=['selenium'],
     entry_points={
         "console_scripts": [
             "didyoumean3=didyoumean3.__main__:main",
