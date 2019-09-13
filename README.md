@@ -16,8 +16,8 @@ To make use of it:
 
 
 # Requirements 
-Python3
-BeautifulSoup==3.2.1
+- Python3
+- BeautifulSoup==3.2.1
 
 
 # Credits
