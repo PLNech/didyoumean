@@ -1,26 +1,15 @@
 import sys
 from urllib.parse import quote
-from urllib.request import Request, urlopen
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 options = Options()
 options.add_argument('--headless')
-driver = webdriver.Chrome(options=options)
-
-
-def get_page(url):
-    request = Request(url)
-    request.add_header('User-Agent',
-                       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) '
-                       'Chrome/19.0.1036.7 Safari/535.20')
-    response = urlopen(request)
-    data = response.read()
-    return data
 
 
 def did_you_mean(query, source_language="auto"):
+    driver = webdriver.Chrome(options=options)
     query = str(query).strip()
     url = "https://translate.google.com/#view=home&op=translate&sl=%s&tl=fr&text=" % source_language + quote(query)
 
