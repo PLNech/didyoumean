@@ -1,24 +1,28 @@
 # didYouMean
 
-didYouMean is Python function that you can use to correct spelling mistakes that users make, and the words arent available in any of the Dictionaries.
+didYouMean is Python module that you can use to correct spelling mistakes. It leverages Google's "Did You Mean" feature.
 
-didYouMean makes use of Google's "Did You Mean" feature.
-
-To make use of it:
-
-	python didYouMean.py "fotball"
-
-	=> football
-
-	python didYouMean.py "football"
-
-	=> 1
-
-
-# Requirements 
+## Requirements
 - Python3
-- BeautifulSoup==3.2.1
+- `beautifulsoup4==4.8.0`
 
+## Usage
+```bash
+python didYouMean.py "fotball"
+> football
+python didYouMean.py "football"
+> football
+```
+
+```python
+from didYouMean3 import didYouMean
+didYouMean("fotball") # -> football
+didYouMean("fotball") # -> football
+```
 
 # Credits
-Adapted by @PLNech based on the work by @bkvirendra.
+Adapted by [@PLNech](https://github.com/PLNech) based on the work by [@bkvirendra](https://github.com/bkvirendra).
+
+# License
+
+DidYouMean3 is [free software under the Gnu GPLv3 license](./LICENSE).
