@@ -1,5 +1,4 @@
 import sys
-import sys
 import urllib
 from urllib.parse import quote
 from urllib.request import Request, urlopen
@@ -7,7 +6,7 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
 
-def getPage(url):
+def get_page(url):
     request = Request(url)
     request.add_header('User-Agent',
                        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20')
@@ -16,10 +15,10 @@ def getPage(url):
     return data
 
 
-def didYouMean(q):
+def did_you_mean(q):
     q = str(str.lower(q)).strip()
     url = "http://www.google.com/search?q=" + quote(q)
-    html = getPage(url)
+    html = get_page(url)
     soup = BeautifulSoup(html, 'html.parser')
     async_contexts = [item.attrs["data-async-context"] for item in soup.find_all() if
                       "data-async-context" in item.attrs]
@@ -32,4 +31,4 @@ if __name__ == "__main__":
         arg = sys.argv[1]
     else:
         arg = "Brittney spers"
-    print(didYouMean(arg))
+    print(did_you_mean(arg))
