@@ -1,6 +1,6 @@
 import sys
 
-from didYouMean import didYouMean
+from didyoumean import did_you_mean
 
 
 def main():
@@ -8,7 +8,7 @@ def main():
         arg = sys.argv[1]
     else:
         arg = "Brittney spers"
-    print(didYouMean(arg))
+    print(did_you_mean(arg))
 
 
 if __name__ == "__main__":

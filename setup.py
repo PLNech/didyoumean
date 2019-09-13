@@ -9,7 +9,7 @@ README = (HERE / "README.md").read_text()
 
 # This call to setup() does all the work
 setup(
-    name="didYouMean3",
+    name="didyoumean3",
     version="0.1.1",
     description="\"Did You Mean?\" suggestions for your Python3 projects.",
     long_description=README,
@@ -28,7 +28,7 @@ setup(
     install_requires=["bs4"],
     entry_points={
         "console_scripts": [
-            "didyoumean=didYouMean.__main__:main",
+            "didyoumean=didyoumean.__main__:main",
         ]
     },
 )
