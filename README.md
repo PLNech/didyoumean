@@ -4,7 +4,7 @@ didYouMean is Python module that you can use to correct spelling mistakes. It le
 
 ## Requirements
 - Python3
-- `beautifulsoup4==4.8.0`
+- `selenium`
 
 ## Usage
 ```bash
@@ -17,10 +17,10 @@ python didYouMean.py "ich bin mude" "de"
 ```
 
 ```python
-from didYouMean3 import didYouMean
-didYouMean("fotball") # -> football
-didYouMean("football") # -> football
-didYouMean("ich bin mude") # -> ich bin müde
+from didyoumean3.didyoumean import did_you_mean
+did_you_mean("fotball") # -> football
+did_you_mean("football") # -> football
+did_you_mean("ich bin mude") # -> ich bin müde
 ```
 
 # Credits
