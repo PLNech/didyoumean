@@ -12,6 +12,7 @@ class IntegrationTestCase(unittest.TestCase):
         ("Pommes de terre sautees", "Pommes de terre sautées"),
         ("steak hache", "steak haché"),
         ("télégrafe", "télégraphe"),
+        ("Focacia d'aubergine", "Focaccia d'aubergine")
     ]
 
     def setUp(self):

@@ -25,6 +25,9 @@ def did_you_mean(query, source_language="auto"):
 
     driver.get(url)
     div = driver.find_element_by_id("spelling-correction")
+    a = div.find_element_by_tag_name("a")
+    if a is not None:
+        div = a
     suggestion = div.text.replace("Did you mean:", "").strip()
     return suggestion if len(suggestion) else query
 
