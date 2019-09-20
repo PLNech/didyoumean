@@ -8,13 +8,23 @@ options = Options()
 options.add_argument('--headless')
 
 
+
 def did_you_mean(query, source_language="auto"):
+    """
+    Spell-checks a sentence.
+
+    :param query: an input sentence to spellcheck.
+    :param source_language: a specific language to translate from. Defaults to automated language detection.
+
+    :return: the query after applying suggestions, or unmodified if none is found.
+    """
+
     driver = webdriver.Chrome(options=options)
     query = str(query).strip()
-    url = "https://translate.google.com/#view=home&op=translate&sl=%s&tl=fr&text=" % source_language + quote(query)
+    url = "https://translate.google.com/#view=home&op=translate&sl=%s&tl=en&text=" % source_language + quote(query)
 
     driver.get(url)
-    div = driver.find_element_by_class_name("spelling-correction")
+    div = driver.find_element_by_id("spelling-correction")
     suggestion = div.text.replace("Did you mean:", "").strip()
     return suggestion if len(suggestion) else query
 
