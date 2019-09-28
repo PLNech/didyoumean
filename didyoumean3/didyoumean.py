@@ -1,3 +1,4 @@
+import logging
 import sys
 from urllib.parse import quote
 
@@ -7,6 +8,8 @@ from selenium.webdriver.chrome.options import Options
 options = Options()
 options.add_argument('--headless')
 
+# logging.basicConfig(level=logging.INFO)
+log = logging.getLogger()
 
 
 def did_you_mean(query, source_language="auto"):
@@ -24,11 +27,15 @@ def did_you_mean(query, source_language="auto"):
     url = "https://translate.google.com/#view=home&op=translate&sl=%s&tl=en&text=" % source_language + quote(query)
 
     driver.get(url)
+    # log.debug(driver.execute_script("return document.documentElement.outerHTML;"))
     div = driver.find_element_by_id("spelling-correction")
+    log.info("<div>: [%s]" % div.get_attribute('innerHTML'))
     a = div.find_element_by_tag_name("a")
+    log.info("<a>: [%s]" % a.get_attribute('innerHTML'))
     if a is not None:
         div = a
     suggestion = div.text.replace("Did you mean:", "").strip()
+    log.info("Suggestion: %s" % suggestion)
     return suggestion if len(suggestion) else query
 
 
