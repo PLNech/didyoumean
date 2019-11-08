@@ -3,6 +3,7 @@ import sys
 from urllib.parse import quote
 
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 
 options = Options()
@@ -30,10 +31,14 @@ def did_you_mean(query, source_language="auto"):
     # log.debug(driver.execute_script("return document.documentElement.outerHTML;"))
     div = driver.find_element_by_id("spelling-correction")
     log.info("<div>: [%s]" % div.get_attribute('innerHTML'))
-    a = div.find_element_by_tag_name("a")
-    log.info("<a>: [%s]" % a.get_attribute('innerHTML'))
-    if a is not None:
-        div = a
+    try:
+        a = div.find_element_by_tag_name("a")
+        a_html = a.get_attribute('innerHTML')
+        log.info("<a>: [%s]" % a_html)
+        if len(a_html):
+            div = a
+    except NoSuchElementException:
+        pass
     suggestion = div.text.replace("Did you mean:", "").strip()
     log.info("Suggestion: %s" % suggestion)
     return suggestion if len(suggestion) else query
@@ -45,5 +50,5 @@ if __name__ == "__main__":
     elif len(sys.argv) > 1:
         result = did_you_mean(sys.argv[1])
     else:
-        result = did_you_mean("steak hache grille")
+        result = did_you_mean("steak hache  grille")
     print("Suggestion:", result)
